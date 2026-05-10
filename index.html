@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlueRoses</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    .feelings {
+  margin-bottom: 25px;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.feelings h2 {
+  color: #93c5fd;
+  margin-bottom: 15px;
+  font-size: 24px;
+  text-shadow: 0 0 15px rgba(147,197,253,0.5);
+}
+
+.feelings p {
+  margin-bottom: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.75);
+  font-size: 14px;
+}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+.music-info {
+  margin-top: 20px;
+  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+}
+    body {
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at top, #0f172a, #020617);
+      color: white;
+      position: relative;
+    }
+
+    .bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .rose {
+      position: absolute;
+      color: rgba(96,165,250,0.15);
+      font-size: 22px;
+      animation: float 12s linear infinite;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .card {
+      width: 90%;
+      max-width: 500px;
+      padding: 35px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 0 40px rgba(59,130,246,0.25);
+      z-index: 2;
+      text-align: center;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+      color: #93c5fd;
+      text-shadow: 0 0 20px rgba(147,197,253,0.7);
+    }
+
+    p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 25px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 160px;
+      border: none;
+      outline: none;
+      resize: none;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 15px;
+      margin-bottom: 20px;
+      transition: 0.3s;
+    }
+
+    textarea:focus {
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 0 20px rgba(96,165,250,0.3);
+    }
+
+    textarea::placeholder {
+      color: rgba(255,255,255,0.45);
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 16px;
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 30px rgba(96,165,250,0.5);
+    }
+
+    .status {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #93c5fd;
+    }
+
+    .heart {
+      font-size: 70px;
+      margin-bottom: 15px;
+      animation: pulse 2s infinite;
+      filter: drop-shadow(0 0 20px rgba(96,165,250,0.6));
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.08);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    .cursor-glow{
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle,
+    rgba(0,140,255,0.35) 0%,
+    rgba(0,140,255,0.15) 30%,
+    transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  mix-blend-mode: screen;
+  transition: transform 0.05s linear;
+  filter: blur(30px);
+}
+.container{
+  display:flex;
+  gap:30px;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  padding:20px;
+  z-index:2;
+}
+
+/* Mobile */
+@media (max-width: 900px){
+
+  body{
+    height:auto;
+    overflow-y:auto;
+    padding:40px 0;
+  }
+
+  .container{
+    flex-direction:column;
+  }
+
+  .feelings,
+  .card{
+    width:90%;
+    max-width:500px;
+  }
+
+}
+  </style>
+</head>
+
+<body>
+  <div class="container">
+        <div class="feelings">
+        <div class="music-info">
+  🎧 Lost In Blue Roses
+</div>
+<audio id="bgmusic" loop>
+  <source src="song2.mp3" type="audio/mpeg">
+</audio>
+<div class="cursor-glow"></div>
+<script>
+document.body.addEventListener('click', function () {
+  document.getElementById('bgmusic').play();
+}, { once: true });
+</script>
+  <h2>For You</h2>
+
+  <p>
+    Some feelings stay silent,<br>
+    even when the heart wants to scream.
+  </p>
+
+  <p>
+    I made this place because words
+    were never enough in real life.
+  </p>
+
+  <p>
+    I still remember the first time we laughed together so genuinely.
+And I remember the last one too — it was even funnier, about your cross-eyed teacher.
+Yeah… it’s strange. And somehow, even stranger than that.
+
+“There are no blue roses,”
+just like maybe there was never really an “us.”
+
+But…
+
+Even I don’t fully understand why I still love you.
+Maybe the reason is your eyes.I just don't want so say I love you. I want diffrent way.I know it never effects our decisions. 
+
+  </p>
+  <h2>Write Something Please.I hope You will notice this.</h2>
+</div>
+<div class="bg" id="bg"></div>
+
+  <div class="card">
+    <div class="heart">💙</div>
+
+    <h1>BlueRoses</h1>
+
+    <p>
+      Write something your heart couldn't say.
+    </p>
+
+    <textarea id="message" placeholder="Leave your feelings here..."></textarea>
+
+    <button onclick="sendMessage()">Send To BlueRoses</button>
+
+    <div class="status" id="status"></div>
+  </div>
+  </div>
+
+  
+
+  <script>
+    // Floating Roses
+    const bg = document.getElementById('bg');
+
+    for (let i = 0; i < 25; i++) {
+      const rose = document.createElement('div');
+      rose.classList.add('rose');
+      rose.innerHTML = '🌹';
+      rose.style.left = Math.random() * 100 + 'vw';
+      rose.style.animationDuration = (8 + Math.random() * 10) + 's';
+      rose.style.fontSize = (15 + Math.random() * 25) + 'px';
+      bg.appendChild(rose);
+    }
+
+
+    // TELEGRAM SETTINGS
+    const BOT_TOKEN = '8713136143:AAGBIicnQwuBXUUVVQoOBgM4xKrwrkDQrBY';
+    const CHAT_ID = '6048892377';
+
+
+    async function sendMessage() {
+      const message = document.getElementById('message').value;
+      const status = document.getElementById('status');
+
+      if (!message.trim()) {
+        status.innerHTML = 'Write something first...';
+        return;
+      }
+
+      status.innerHTML = 'Sending...';
+
+      const text = `🌹 New BlueRoses Message\n\n${message}`;
+
+      try {
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: text
+          })
+        });
+
+        status.innerHTML = 'Message delivered 💙';
+        document.getElementById('message').value = '';
+
+      } catch (error) {
+        status.innerHTML = 'Error sending message';
+      }
+    }
+    const songs = [
+  "song1.mp3",
+  "song2.mp3",
+  "song3.mp3"
+];
+
+let currentSong = 0;
+
+const audio = document.getElementById("bgMusic");
+
+function playSong(index) {
+  audio.src = songs[index];
+  audio.volume = 0.5;
+
+  audio.play().catch(() => {
+    console.log("Autoplay blocked");
+  });
+}
+
+audio.addEventListener("ended", () => {
+  currentSong++;
+
+  if (currentSong >= songs.length) {
+    currentSong = 0;
+  }
+
+  playSong(currentSong);
+});
+
+playSong(currentSong);
+const glow = document.querySelector('.cursor-glow');
+
+document.addEventListener('mousemove', (e) => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+  </script>
+
+</body>
+</html>
