@@ -187,18 +187,65 @@
         transform: scale(1);
       }
     }
+    .cursor-glow{
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle,
+    rgba(0,140,255,0.35) 0%,
+    rgba(0,140,255,0.15) 30%,
+    transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  mix-blend-mode: screen;
+  transition: transform 0.05s linear;
+  filter: blur(30px);
+}
+.container{
+  display:flex;
+  gap:30px;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  padding:20px;
+  z-index:2;
+}
+
+/* Mobile */
+@media (max-width: 900px){
+
+  body{
+    height:auto;
+    overflow-y:auto;
+    padding:40px 0;
+  }
+
+  .container{
+    flex-direction:column;
+  }
+
+  .feelings,
+  .card{
+    width:90%;
+    max-width:500px;
+  }
+
+}
   </style>
 </head>
 
 <body>
-    <div class="feelings">
+  <div class="container">
+        <div class="feelings">
         <div class="music-info">
   🎧 Lost In Blue Roses
 </div>
 <audio id="bgmusic" loop>
-  <source src="song3.mp3" type="audio/mpeg">
+  <source src="song2.mp3" type="audio/mpeg">
 </audio>
-
+<div class="cursor-glow"></div>
 <script>
 document.body.addEventListener('click', function () {
   document.getElementById('bgmusic').play();
@@ -217,12 +264,22 @@ document.body.addEventListener('click', function () {
   </p>
 
   <p>
-    Maybe blue roses don't exist naturally...
-    just like impossible feelings.
-  </p>
-</div>
+    I still remember the first time we laughed together so genuinely.
+And I remember the last one too — it was even funnier, about your cross-eyed teacher.
+Yeah… it’s strange. And somehow, even stranger than that.
 
-  <div class="bg" id="bg"></div>
+“There are no blue roses,”
+just like maybe there was never really an “us.”
+
+But…
+
+Even I don’t fully understand why I still love you.
+Maybe the reason is your eyes.I just don't want so say I love you. I want diffrent way.I know it never effects our decisions. 
+
+  </p>
+  <h2>Write Something Please.I hope You will notice this.</h2>
+</div>
+<div class="bg" id="bg"></div>
 
   <div class="card">
     <div class="heart">💙</div>
@@ -239,6 +296,9 @@ document.body.addEventListener('click', function () {
 
     <div class="status" id="status"></div>
   </div>
+  </div>
+
+  
 
   <script>
     // Floating Roses
@@ -322,6 +382,12 @@ audio.addEventListener("ended", () => {
 });
 
 playSong(currentSong);
+const glow = document.querySelector('.cursor-glow');
+
+document.addEventListener('mousemove', (e) => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
 
   </script>
 
